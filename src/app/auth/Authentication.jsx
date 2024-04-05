@@ -31,7 +31,6 @@ function Authentication(props) {
 	 * Firebase Auth
 	 */
 	const { user: firebaseUser, authStatus: firebaseAuthStatus } = useFirebaseAuth();
-	console.log('AUTHENTICATION', firebaseUser, firebaseAuthStatus)
 	/**
 	 * isLoading
 	 */
@@ -46,7 +45,6 @@ function Authentication(props) {
 			firebaseAuthStatus === 'configuring',
 		[amplifyAuthStatus, jwtAuthStatus, firebaseAuthStatus]
 	);
-	console.log('AUTHENTICATION',inProgress, 'INPROGRESS')
 	/**
 	 * Any user is authenticated
 	 */
@@ -57,7 +55,6 @@ function Authentication(props) {
 			firebaseAuthStatus === 'authenticated',
 		[amplifyAuthStatus, jwtAuthStatus, firebaseAuthStatus]
 	);
-	console.log('AUTHENTICATION',authenticated, 'AUTHENTICATED')
 	/**
 	 * All users are unauthenticated
 	 */
@@ -68,7 +65,6 @@ function Authentication(props) {
 			firebaseAuthStatus === 'unauthenticated',
 		[amplifyAuthStatus, jwtAuthStatus, firebaseAuthStatus]
 	);
-	console.log('AUTHENTICATION',unAuthenticated, 'UNAUTHENTICATED')
 	/**
 	 * Sign Out
 	 */
@@ -89,8 +85,6 @@ function Authentication(props) {
 	 * Handle sign in
 	 */
 	const handleSignIn = useCallback((provider, userState) => {
-		console.log(provider, userState)
-		console.log('handleSignIn', true)
 		dispatch(setUser(userState)).then(() => {
 			setAuthProvider(provider);
 			setIsLoading(false);
@@ -107,9 +101,7 @@ function Authentication(props) {
 	 * Handle Sign In on load
 	 */
 	useEffect(() => {
-		console.log('Authentication', 'useEffect', firebaseUser, isLoading)
 		if (inProgress || !authenticated) {
-			console.log('Authentication', 'authenticated', false)
 			return;
 		}
 
@@ -138,7 +130,6 @@ function Authentication(props) {
 		}
 
 		if (firebaseUser) {
-			console.log('Authentication', firebaseUser)
 			handleSignIn(
 				'firebase',
 				UserModel({

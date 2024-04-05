@@ -10,6 +10,8 @@ import { navbarCloseMobile } from '../navbar/navbarSlice';
 function Navigation(props) {
 	const { className = '', layout = 'vertical', dense, active } = props;
 	const navigation = useAppSelector(selectNavigation);
+	console.log(navigation)
+
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const dispatch = useAppDispatch();
 	return useMemo(() => {

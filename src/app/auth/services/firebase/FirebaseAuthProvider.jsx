@@ -16,7 +16,6 @@ const defaultAuthContext = {
 };
 export const FirebaseAuthContext = createContext(defaultAuthContext);
 
-console.log('FIREBASEAUTHPROVIDER');
 function FirebaseAuthProvider(props) {
 	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +54,8 @@ function FirebaseAuthProvider(props) {
 		};
 	}, []);
 	const signIn = useCallback(({ email, password }) => {
-		return firebase.auth().signInWithEmailAndPassword(email, password);
+		const result = firebase.auth().signInWithEmailAndPassword(email, password);
+		return result
 	}, []);
 	const signUp = useCallback(({ email, password, displayName }) => {
 		const signUpResponse = new Promise((resolve, reject) => {
@@ -78,7 +78,6 @@ function FirebaseAuthProvider(props) {
 							uid: userCredential.user.multiFactor.user.uid
 							})
 							.then(user => {
-								console.log(user)
 								resolve(userCredential);
 							})
 
