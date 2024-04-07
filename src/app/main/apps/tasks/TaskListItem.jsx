@@ -14,6 +14,25 @@ import { useUpdateTasksItemMutation } from './TasksApi';
 /**
  * The task list item.
  */
+
+function calculateTimeDifference(nextRunAt) {
+    const currentTime = new Date();
+    const differenceInMilliseconds = new Date(nextRunAt) - currentTime;
+    const differenceInMinutes = Math.max(0, Math.floor(differenceInMilliseconds / (1000 * 60)));
+    return differenceInMinutes;
+}
+
+function renderTimeDifference(nextRunAt) {
+    const differenceInMinutes = calculateTimeDifference(nextRunAt);
+    if (differenceInMinutes > 0) {
+        return `Next run in ${differenceInMinutes} minutes`;
+    } else if (differenceInMinutes === 0) {
+        return "Running now";
+    } else {
+        return "Unknown";
+    }
+}
+
 function TaskListItem(props) {
 	const { data, index } = props;
 	const [updateTask] = useUpdateTasksItemMutation();
@@ -74,14 +93,27 @@ function TaskListItem(props) {
 								)}
 							</div>
 
-							{data.dueDate && (
-								<Typography
-									className="text-12 whitespace-nowrap"
-									color="text.secondary"
-								>
-									{format(new Date(data.dueDate), 'LLL dd')}
-								</Typography>
+							<Typography
+								className="text-12 whitespace-nowrap"
+								color="text.secondary"
+							>
+								{data.dueDate && (
+									<span>{format(new Date(data.dueDate), 'LLL dd')}</span>
+								)}
+								{data.nextRunAt && (
+								<span className=''>
+									{data.dueDate ? ' ' : ''}
+									Next Run At {format(new Date(data.nextRunAt), 'LLL dd HH:mm')}
+									{data.nextRunAt && (
+										<span className='hidden md:block md:text-red'>
+											&nbsp;
+											{renderTimeDifference(data.nextRunAt)}
+										</span>
+									)}
+								</span>
 							)}
+							</Typography>
+							
 						</div>
 					</ListItem>
 					<Divider />

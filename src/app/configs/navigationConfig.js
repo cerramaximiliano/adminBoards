@@ -43,6 +43,24 @@ const navigationConfig = [
 		translate: 'APPLICATIONS',
 		children: [
 			{
+				id: 'apps.tasks',
+				title: 'Tasks',
+				subtitle: '12 remaining tasks',
+				type: 'item',
+				icon: 'heroicons-outline:check-circle',
+				url: '/apps/tasks',
+				translate: 'TASKS'
+			},
+			{
+				id: 'apps.file-manager',
+				title: 'File Manager',
+				type: 'item',
+				icon: 'heroicons-outline:cloud',
+				url: '/apps/file-manager',
+				end: true,
+				translate: 'FILE_MANAGER'
+			},
+			{
 				id: 'apps.academy',
 				title: 'Academy',
 				type: 'item',
@@ -117,15 +135,6 @@ const navigationConfig = [
 				]
 			},
 			{
-				id: 'apps.file-manager',
-				title: 'File Manager',
-				type: 'item',
-				icon: 'heroicons-outline:cloud',
-				url: '/apps/file-manager',
-				end: true,
-				translate: 'FILE_MANAGER'
-			},
-			{
 				id: 'apps.help-center',
 				title: 'Help Center',
 				type: 'collapse',
@@ -186,15 +195,6 @@ const navigationConfig = [
 				icon: 'heroicons-outline:view-boards',
 				url: '/apps/scrumboard',
 				translate: 'SCRUMBOARD'
-			},
-			{
-				id: 'apps.tasks',
-				title: 'Tasks',
-				subtitle: '12 remaining tasks',
-				type: 'item',
-				icon: 'heroicons-outline:check-circle',
-				url: '/apps/tasks',
-				translate: 'TASKS'
 			},
 			{
 				id: 'apps.profile',

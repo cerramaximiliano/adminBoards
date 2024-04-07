@@ -12,13 +12,13 @@ import { useAppSelector } from 'app/store/hooks';
 import { useSelector } from 'react-redux';
 import withAppProviders from './withAppProviders';
 import AuthenticationProvider from './auth/AuthenticationProvider';
-// import axios from 'axios';
+import axios from 'axios';
 /**
  * Axios HTTP Request defaults
  */
-// axios.defaults.baseURL = "";
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.baseURL = "local";
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 const emotionCacheOptions = {
 	rtl: {
 		key: 'muirtl',

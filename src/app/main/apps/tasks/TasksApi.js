@@ -9,7 +9,7 @@ const TasksApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getTasks: build.query({
-				query: () => ({ url: `/mock-api/tasks` }),
+				query: () => ({ url: `${import.meta.env.VITE_BASE_URL}/tasks`}),
 				providesTags: ['tasks_list']
 			}),
 			reorderTasks: build.mutation({
@@ -46,7 +46,7 @@ const TasksApi = api
 				invalidatesTags: ['tasks_list']
 			}),
 			getTasksItem: build.query({
-				query: (taskId) => ({ url: `/mock-api/tasks/${taskId}` }),
+				query: (taskId) => ({ url: `${import.meta.env.VITE_BASE_URL}/tasks/${taskId}` }),
 				providesTags: ['tasks_item']
 			}),
 			deleteTasksItem: build.mutation({

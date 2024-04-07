@@ -4,6 +4,7 @@ import mockApi from '../mock-api.json';
 
 let tasksDB = mockApi.components.examples.tasks.value;
 const tagsDB = mockApi.components.examples.tasks_tags.value;
+
 export const tasksApiMocks = (mock) => {
 	mock.onGet('/tasks').reply(() => {
 		return [200, tasksDB];
@@ -31,7 +32,7 @@ export const tasksApiMocks = (mock) => {
 	mock.onGet('/tasks/:id').reply((config) => {
 		const { id } = config.params;
 		const task = _.find(tasksDB, { id });
-
+		console.log(task)
 		if (task) {
 			return [200, task];
 		}
