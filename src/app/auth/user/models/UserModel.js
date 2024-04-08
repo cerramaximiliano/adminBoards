@@ -14,7 +14,9 @@ function UserModel(data) {
 			email: '',
 			shortcuts: [],
 			settings: {}
-		}
+		},
+		url: '',
+		apiKey: ''
 	});
 }
 

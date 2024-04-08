@@ -28,6 +28,8 @@ import {
 } from '../TasksApi';
 import SectionModel from '../models/SectionModel';
 import TaskModel from '../models/TaskModel';
+import { useAppSelector } from 'app/store/hooks';
+import { selectUser } from 'src/app/auth/user/store/userSlice';
 /**
  * Form Validation Schema
  */
@@ -54,12 +56,13 @@ const schema = z.object({
  * The task form.
  */
 function TaskForm() {
+
+	const {url, apiKey} = useAppSelector(selectUser);
+
 	const routeParams = useParams();
 	const taskId = routeParams?.id;
 	const taskType = routeParams?.type;
-	const { data: task, isError } = useGetTasksItemQuery(routeParams.id, {
-		skip: !taskId || taskId === 'new'
-	});
+	const { data: task, isError } = useGetTasksItemQuery(url ? `${url}/tasks/${routeParams.id}` : `/mock-api/tasks/${routeParams.id}`, apiKey);
 	const { data: tags } = useGetTasksTagsQuery();
 	const [updateTask] = useUpdateTasksItemMutation();
 	const [createTask] = useCreateTasksItemMutation();

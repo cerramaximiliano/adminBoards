@@ -5,19 +5,21 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import TaskListItem from './TaskListItem';
 import SectionListItem from './SectionListItem';
 import { useGetTasksQuery, useReorderTasksMutation } from './TasksApi';
+import { useAppSelector } from 'app/store/hooks';
+import { selectUser } from 'src/app/auth/user/store/userSlice';
 
 /**
  * The tasks list.
  */
 function TasksList() {
-	const { data: tasks, isLoading } = useGetTasksQuery();
+	const {url} = useAppSelector(selectUser);
+	const { data: tasks, isLoading } = useGetTasksQuery(url || '/mock-api');
 	const [reorderList] = useReorderTasksMutation();
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
-
-	if (tasks.length === 0) {
+	if (!tasks  || tasks.length === 0) {
 		return (
 			<div className="flex flex-1 items-center justify-center h-full">
 				<Typography
@@ -71,7 +73,6 @@ function TasksList() {
 											/>
 										);
 									}
-
 									if (item.type === 'section') {
 										return (
 											<SectionListItem

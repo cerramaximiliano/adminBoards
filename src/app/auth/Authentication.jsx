@@ -85,6 +85,7 @@ function Authentication(props) {
 	 * Handle sign in
 	 */
 	const handleSignIn = useCallback((provider, userState) => {
+		console.log(userState)
 		dispatch(setUser(userState)).then(() => {
 			setAuthProvider(provider);
 			setIsLoading(false);
@@ -135,7 +136,9 @@ function Authentication(props) {
 				UserModel({
 					uid: firebaseUser.uid,
 					data: firebaseUser.data,
-					role: ['admin']
+					role: ['admin'],
+					url: firebaseUser.url || '/mock-api',
+					apiKey: firebaseUser.apiKey
 				})
 			);
 		}

@@ -2,6 +2,7 @@ import { apiService as api } from 'app/store/apiService';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 
 export const addTagTypes = ['tasks_list', 'tasks_item', 'tasks_tags'];
+
 const TasksApi = api
 	.enhanceEndpoints({
 		addTagTypes
@@ -9,8 +10,14 @@ const TasksApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getTasks: build.query({
-				query: () => ({ url: `${import.meta.env.VITE_BASE_URL}/tasks`}),
+				query: (baseUrl) => 
+					{
+						return {
+							url: `${baseUrl}/tasks`,
+							}
+			},
 				providesTags: ['tasks_list']
+			
 			}),
 			reorderTasks: build.mutation({
 				query: ({ startIndex, endIndex }) => ({
@@ -46,7 +53,10 @@ const TasksApi = api
 				invalidatesTags: ['tasks_list']
 			}),
 			getTasksItem: build.query({
-				query: (taskId) => ({ url: `${import.meta.env.VITE_BASE_URL}/tasks/${taskId}` }),
+				query: (baseUrl) => ({
+ 					url: `${baseUrl}`,
+				})
+					,
 				providesTags: ['tasks_item']
 			}),
 			deleteTasksItem: build.mutation({
@@ -65,7 +75,7 @@ const TasksApi = api
 				invalidatesTags: ['tasks_item', 'tasks_list']
 			}),
 			getTasksTags: build.query({
-				query: () => ({ url: `/mock-api/tasks/tags` }),
+				query: (baseUrl) => ({ url: `/mock-api/tasks/tags` }),
 				providesTags: ['tasks_tags']
 			}),
 			createTasksTag: build.mutation({

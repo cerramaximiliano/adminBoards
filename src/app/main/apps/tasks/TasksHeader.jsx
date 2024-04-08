@@ -5,12 +5,16 @@ import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import _ from '@lodash';
 import { useGetTasksQuery } from './TasksApi';
+import { useAppSelector } from 'app/store/hooks';
+import { selectUser } from 'src/app/auth/user/store/userSlice';
 
 /**
  * The tasks header.
  */
+
 function TasksHeader() {
-	const { data: tasks } = useGetTasksQuery();
+	const {url, apiKey} = useAppSelector(selectUser);
+	const { data: tasks } = useGetTasksQuery(url || '/mock-api', apiKey);
 	const remainingTasks = _.filter(tasks, (item) => item.type === 'task' && !item.completed).length;
 	return (
 		<div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 p-24 sm:p-32 w-full border-b-1 justify-between">

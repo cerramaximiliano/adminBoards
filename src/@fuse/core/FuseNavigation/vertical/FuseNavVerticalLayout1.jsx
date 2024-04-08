@@ -41,7 +41,6 @@ const StyledList = styled(List)(({ theme }) => ({
  */
 function FuseNavVerticalLayout1(props) {
 	const { navigation, active, dense, className, onItemClick, checkPermission } = props;
-	console.log(navigation)
 	function handleItemClick(item) {
 		onItemClick?.(item);
 	}
