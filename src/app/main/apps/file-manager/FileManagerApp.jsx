@@ -18,15 +18,12 @@ function FileManagerApp() {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const routeParams = useParams();
 	const { folderId } = routeParams;
-	console.log(folderId)
 
 	const mode = import.meta.env.VITE_MODE;
-	let urlEnv = '';
-	const {url} = useAppSelector(selectUser);
-	if ( mode === 'development' ) urlEnv = url;
-	else urlEnv = '/';
 
-	const { data, isLoading } = useGetFileManagerFolderQuery(urlEnv ? `${urlEnv}files/logs` : `/mock-api/file-manager/${folderId}` );
+	const {url, apiKey} = useAppSelector(selectUser);
+
+	const { data, isLoading } = useGetFileManagerFolderQuery(url ? `${url}files/logs` : `/mock-api/file-manager/${folderId}` );
 
 	console.log(data)
 

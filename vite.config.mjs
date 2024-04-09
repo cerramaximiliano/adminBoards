@@ -31,7 +31,7 @@ export default defineConfig({
     server: {
         cors: { origin: "*" },
         open: true,
-        port: 3030,
+        port: 3001,
     },
     define: {
         global: 'window',
