@@ -13,8 +13,12 @@ import { selectUser } from 'src/app/auth/user/store/userSlice';
  */
 
 function TasksHeader() {
+	const mode = import.meta.env.VITE_MODE;
+	let urlEnv = '';
 	const {url, apiKey} = useAppSelector(selectUser);
-	const { data: tasks } = useGetTasksQuery(url || '/mock-api', apiKey);
+	if ( mode === 'development' ) urlEnv = url;
+	else urlEnv = '/';
+	const { data: tasks } = useGetTasksQuery(urlEnv || '/mock-api/', apiKey);
 	const remainingTasks = _.filter(tasks, (item) => item.type === 'task' && !item.completed).length;
 	return (
 		<div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 p-24 sm:p-32 w-full border-b-1 justify-between">

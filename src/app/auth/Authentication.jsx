@@ -12,6 +12,9 @@ import useJwtAuth from './services/jwt/useJwtAuth';
 import useFirebaseAuth from './services/firebase/useFirebaseAuth';
 
 function Authentication(props) {
+
+	console.log(import.meta.env.VITE_MODE)
+
 	const { children } = props;
 	const { setAuthProvider, resetAuthProvider } = useAuth();
 	const userRole = useAppSelector(selectUserRole);
@@ -85,7 +88,6 @@ function Authentication(props) {
 	 * Handle sign in
 	 */
 	const handleSignIn = useCallback((provider, userState) => {
-		console.log(userState)
 		dispatch(setUser(userState)).then(() => {
 			setAuthProvider(provider);
 			setIsLoading(false);

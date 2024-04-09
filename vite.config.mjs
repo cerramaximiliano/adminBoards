@@ -26,11 +26,12 @@ export default defineConfig({
         },
     ],
     build: {
-        outDir: 'build',
+        outDir: 'dist',
     },
     server: {
+        cors: { origin: "*" },
         open: true,
-        port: 3030
+        port: 3030,
     },
     define: {
         global: 'window',

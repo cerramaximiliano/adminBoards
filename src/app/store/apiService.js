@@ -9,8 +9,11 @@ const axiosBaseQuery = () => async ({ url, method, data, params }) => {
             method,
             data,
             params,
-            headers: 'x-api-key=&xi8Apdc4qt5eP+BMBsC03Vu4E^WVt'
+            headers: {
+                'x-api-key': 'WMEyVRFmNegvwuB1YT4rkKW5Yjh1'
+            }
         });
+        console.log(result.data, url)
         return { data: result.data };
     } catch (axiosError) {
         const error = axiosError;

@@ -12,8 +12,12 @@ import { selectUser } from 'src/app/auth/user/store/userSlice';
  * The tasks list.
  */
 function TasksList() {
-	const {url} = useAppSelector(selectUser);
-	const { data: tasks, isLoading } = useGetTasksQuery(url || '/mock-api');
+	const mode = import.meta.env.VITE_MODE;
+	let urlEnv = '';
+	const {url, apiKey} = useAppSelector(selectUser);
+	if ( mode === 'development' ) urlEnv = url;
+	else urlEnv = '/';
+	const { data: tasks, isLoading } = useGetTasksQuery(urlEnv || '/mock-api/');
 	const [reorderList] = useReorderTasksMutation();
 
 	if (isLoading) {

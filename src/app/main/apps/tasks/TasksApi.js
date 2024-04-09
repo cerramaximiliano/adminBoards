@@ -13,7 +13,7 @@ const TasksApi = api
 				query: (baseUrl) => 
 					{
 						return {
-							url: `${baseUrl}/tasks`,
+							url: `${baseUrl}tasks`,
 							}
 			},
 				providesTags: ['tasks_list']

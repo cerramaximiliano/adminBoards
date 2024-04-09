@@ -57,12 +57,16 @@ const schema = z.object({
  */
 function TaskForm() {
 
+	const mode = import.meta.env.VITE_MODE;
+	let urlEnv = '';
 	const {url, apiKey} = useAppSelector(selectUser);
+	if ( mode === 'development' ) urlEnv = url;
+	else urlEnv = '/';
 
 	const routeParams = useParams();
 	const taskId = routeParams?.id;
 	const taskType = routeParams?.type;
-	const { data: task, isError } = useGetTasksItemQuery(url ? `${url}/tasks/${routeParams.id}` : `/mock-api/tasks/${routeParams.id}`, apiKey);
+	const { data: task, isError } = useGetTasksItemQuery(urlEnv ? `${urlEnv}tasks/${routeParams.id}` : `/mock-api/tasks/${routeParams.id}`);
 	const { data: tags } = useGetTasksTagsQuery();
 	const [updateTask] = useUpdateTasksItemMutation();
 	const [createTask] = useCreateTasksItemMutation();
