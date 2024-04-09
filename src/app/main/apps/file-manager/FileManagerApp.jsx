@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import FuseLoading from '@fuse/core/FuseLoading';
 import _ from '@lodash';
 import { useAppSelector } from 'app/store/hooks';
+import { selectUser } from 'src/app/auth/user/store/userSlice';
 import DetailSidebarContent from './DetailSidebarContent';
 import FileManagerHeader from './FileManagerHeader';
 import FileManagerList from './FileManagerList';
@@ -17,7 +18,18 @@ function FileManagerApp() {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const routeParams = useParams();
 	const { folderId } = routeParams;
-	const { data, isLoading } = useGetFileManagerFolderQuery(folderId);
+	console.log(folderId)
+
+	const mode = import.meta.env.VITE_MODE;
+	let urlEnv = '';
+	const {url} = useAppSelector(selectUser);
+	if ( mode === 'development' ) urlEnv = url;
+	else urlEnv = '/';
+
+	const { data, isLoading } = useGetFileManagerFolderQuery(urlEnv ? `${urlEnv}files/logs` : `/mock-api/file-manager/${folderId}` );
+
+	console.log(data)
+
 	const selectedItemId = useAppSelector(selectSelectedItemId);
 	const selectedItem = _.find(data?.items, { id: selectedItemId });
 	const folders = _.filter(data?.items, { type: 'folder' });

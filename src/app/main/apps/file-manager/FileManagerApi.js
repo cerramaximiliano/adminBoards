@@ -8,7 +8,7 @@ const FileManagerApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getFileManagerFolder: build.query({
-				query: (folderId) => ({ url: `/mock-api/file-manager/${folderId}` }),
+				query: (baseUrl) => ({ url: baseUrl }),
 				providesTags: ['file_manager_folder']
 			}),
 			updateFileManagerFolder: build.mutation({
