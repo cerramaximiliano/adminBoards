@@ -17,8 +17,10 @@ import { resetSelectedItemId, selectSelectedItemId } from './fileManagerAppSlice
  */
 function DetailSidebarContent(props) {
 	const { items } = props;
+	console.log(items)
 	const location = useLocation();
 	const { pathname } = location;
+	console.log(pathname)
 	const dispatch = useAppDispatch();
 	const selectedItemId = useAppSelector(selectSelectedItemId);
 	const item = _.find(items, { id: selectedItemId });

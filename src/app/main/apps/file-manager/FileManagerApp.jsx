@@ -19,12 +19,9 @@ function FileManagerApp() {
 	const routeParams = useParams();
 	const { folderId } = routeParams;
 
-	const mode = import.meta.env.VITE_MODE;
-
 	const {url} = useAppSelector(selectUser);
 
 	const { data, isLoading } = useGetFileManagerFolderQuery(url ? `${url}files/logs` : `/mock-api/file-manager/${folderId}` );
-
 
 	const selectedItemId = useAppSelector(selectSelectedItemId);
 	const selectedItem = _.find(data?.items, { id: selectedItemId });
