@@ -23,7 +23,7 @@ function FileManagerApp() {
 
 	const {url} = useAppSelector(selectUser);
 
-	const { data, isLoading } = useGetFileManagerFolderQuery(url ? `${url}files/logs` : `/mock-api/file-manager/${folderId}` );
+	const { data, isLoading } = useGetFileManagerFolderQuery(url ? `${url}files/` : `/mock-api/file-manager/${folderId}` );
 
 
 	const selectedItemId = useAppSelector(selectSelectedItemId);
