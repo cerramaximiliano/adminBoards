@@ -3,6 +3,7 @@ import Axios from 'axios';
 
 const axiosBaseQuery = () => async ({ url, method, data, params }) => {
 	Axios.defaults.baseURL = '/api';
+    console.log(url)
     try {
         const result = await Axios({
             url,

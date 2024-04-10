@@ -50,7 +50,7 @@ const ECommerceApi = api
 				invalidatesTags: ['eCommerce_product', 'eCommerce_products']
 			}),
 			getECommerceOrders: build.query({
-				query: () => ({ url: `/mock-api/ecommerce/orders` }),
+				query: (baseUrl) => ({ url: baseUrl }),
 				providesTags: ['eCommerce_orders']
 			}),
 			getECommerceOrder: build.query({

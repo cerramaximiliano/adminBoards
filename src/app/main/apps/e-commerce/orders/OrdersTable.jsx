@@ -11,7 +11,13 @@ import { useDeleteECommerceOrdersMutation, useGetECommerceOrdersQuery } from '..
 import OrdersStatus from '../order/OrdersStatus';
 
 function OrdersTable() {
-	const { data: orders, isLoading } = useGetECommerceOrdersQuery();
+
+	// Pasar por parámetro la url con el enpoint para obtener datos a listar
+
+	const { data: orders, isLoading } = useGetECommerceOrdersQuery(`/mock-api/ecommerce/orders`);
+
+
+
 	const [removeOrders] = useDeleteECommerceOrdersMutation();
 	const columns = useMemo(
 		() => [

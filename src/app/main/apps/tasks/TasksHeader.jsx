@@ -13,7 +13,7 @@ import { selectUser } from 'src/app/auth/user/store/userSlice';
  */
 
 function TasksHeader() {
-	const {url, urlProduction, apiKey} = useAppSelector(selectUser);
+	const {url} = useAppSelector(selectUser);
 
 	const { data: tasks } = useGetTasksQuery(url || '/mock-api/');
 	const remainingTasks = _.filter(tasks, (item) => item.type === 'task' && !item.completed).length;
