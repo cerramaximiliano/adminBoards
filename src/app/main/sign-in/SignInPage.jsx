@@ -26,13 +26,13 @@ const tabs = [
 		title: 'Firebase',
 		logo: 'assets/images/logo/firebase.svg',
 		logoClass: 'h-40'
-	},
-	{
+	}
+/* 	{
 		id: 'aws',
 		title: 'AWS',
 		logo: 'assets/images/logo/aws-amplify.svg',
 		logoClass: 'h-40'
-	}
+	} */
 ];
 
 /**

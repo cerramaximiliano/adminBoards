@@ -100,7 +100,7 @@ function NavbarStyle3Content(props) {
 					>
 						<img
 							className="my-32 w-44"
-							src="assets/images/logo/logo.svg"
+							src="assets/images/adminboards/3.jpg"
 							alt="logo"
 						/>
 

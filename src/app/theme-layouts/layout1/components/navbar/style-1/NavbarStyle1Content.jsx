@@ -52,7 +52,7 @@ function NavbarStyle1Content(props) {
 				<div className="flex-0 flex items-center justify-center py-48 opacity-10">
 					<img
 						className="w-full max-w-64"
-						src="assets/images/logo/logo.svg"
+						src="assets/images/adminboards/3.jpg"
 						alt="footer logo"
 					/>
 				</div>

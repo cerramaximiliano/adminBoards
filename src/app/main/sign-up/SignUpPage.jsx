@@ -24,13 +24,13 @@ const tabs = [
 		title: 'Firebase',
 		logo: 'assets/images/logo/firebase.svg',
 		logoClass: 'h-40'
-	},
-	{
+	}
+/* 	{
 		id: 'aws',
 		title: 'AWS',
 		logo: 'assets/images/logo/aws-amplify.svg',
 		logoClass: 'h-40'
-	}
+	} */
 ];
 
 /**
@@ -48,8 +48,8 @@ function SignUpPage() {
 			<Paper className="h-full w-full px-16 py-8 ltr:border-r-1 rtl:border-l-1 sm:h-auto sm:w-auto sm:rounded-2xl sm:p-48 sm:shadow md:flex md:h-full md:w-1/2 md:items-center md:justify-end md:rounded-none md:p-64 md:shadow-none">
 				<div className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
 					<img
-						className="w-48"
-						src="assets/images/logo/logo.svg"
+						className="w-72 rounded-md"
+						src="assets/images/adminboards/3.jpg"
 						alt="logo"
 					/>
 
