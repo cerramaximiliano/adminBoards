@@ -53,6 +53,9 @@ const ECommerceApi = api
 				query: (baseUrl) => ({ url: baseUrl }),
 				providesTags: ['eCommerce_orders']
 			}),
+			getEcommerceTotalOrders: build.query({
+				query: (baseUrl) => ({url: baseUrl})
+			}),
 			getECommerceOrder: build.query({
 				query: (orderId) => ({ url: `/mock-api/ecommerce/orders/${orderId}` }),
 				providesTags: ['eCommerce_order']
@@ -91,6 +94,7 @@ export const {
 	useUpdateECommerceProductMutation,
 	useDeleteECommerceProductMutation,
 	useGetECommerceOrdersQuery,
+	useGetEcommerceTotalOrdersQuery,
 	useGetECommerceOrderQuery,
 	useUpdateECommerceOrderMutation,
 	useDeleteECommerceOrderMutation,

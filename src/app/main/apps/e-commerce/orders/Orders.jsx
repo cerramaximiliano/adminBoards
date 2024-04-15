@@ -1,11 +1,13 @@
 import GlobalStyles from '@mui/material/GlobalStyles';
 import OrdersHeader from './OrdersHeader';
 import OrdersTable from './OrdersTable';
-
+import { useAppSelector } from 'app/store/hooks';
+import { selectUser } from 'src/app/auth/user/store/userSlice';
 /**
  * The orders page.
  */
 function Orders() {
+	const { url } = useAppSelector(selectUser);
 	return (
 		<>
 			<GlobalStyles
@@ -16,7 +18,7 @@ function Orders() {
 				})}
 			/>
 			<div className="w-full h-full container flex flex-col">
-				<OrdersHeader />
+				<OrdersHeader title={url ? 'Last BTC Data' : 'Orders' } />
 				<OrdersTable />
 			</div>
 		</>

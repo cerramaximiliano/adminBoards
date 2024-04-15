@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import DataTable from 'app/shared-components/data-table/DataTable';
 import { ListItemIcon, MenuItem, Paper } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
@@ -7,64 +7,115 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { useDeleteECommerceOrdersMutation, useGetECommerceOrdersQuery } from '../ECommerceApi';
+import { useDeleteECommerceOrdersMutation, useGetECommerceOrdersQuery, useGetEcommerceTotalOrdersQuery } from '../ECommerceApi';
 import OrdersStatus from '../order/OrdersStatus';
+import { useAppSelector } from 'app/store/hooks';
+import { selectUser } from 'src/app/auth/user/store/userSlice';
+import { format } from 'date-fns';
 
 function OrdersTable() {
 
-	// Pasar por parámetro la url con el enpoint para obtener datos a listar
+	const { url } = useAppSelector(selectUser);
+	const [pagination, setPagination] = useState({
+		pageIndex: 0,
+		pageSize: 10,
+	});
 
-	const { data: orders, isLoading } = useGetECommerceOrdersQuery(`/mock-api/ecommerce/orders`);
+	const { data: orders, isLoading } = useGetECommerceOrdersQuery( url ? `${url}database/ticks?order=-1&limit=100` : `/mock-api/ecommerce/orders` );
 
-
+	const customColumns = [
+		{
+			accessorKey: '_id',
+			header: 'id'
+		},
+		{
+			accessorKey: 'date',
+			header: 'Date',
+			type: 'date',
+			Cell: ({ cell }) => {
+				const formattedDate = format( new Date(cell.getValue()) , 'dd/MM/yyyy HH:mm'); // Convertir de nuevo a cadena para mostrar
+				return formattedDate;
+				},
+		},
+		{
+			accessorKey: 'open',
+			header: 'Open'
+		},
+		{
+			accessorKey: 'high',
+			header: 'High'
+		},
+		{
+			accessorKey: 'low',
+			header: 'Low'
+		},
+		{
+			accessorKey: 'close',
+			header: 'Close'
+		},
+		{
+			accessorKey: 'atr7',
+			header: 'ATR 7'
+		},
+		{
+			accessorKey: 'atr10',
+			header: 'ATR 10'
+		},
+		{
+			accessorKey: 'atr14',
+			header: 'ATR 14'
+		}
+	]
+	const demoColumns = [
+		{
+			accessorKey: 'id',
+			header: 'Id',
+			size: 64
+		},
+		{
+			accessorKey: 'reference',
+			header: 'Reference',
+			size: 64,
+			Cell: ({ row }) => (
+				<Typography
+					component={Link}
+					to={`/apps/e-commerce/orders/${row.original.id}`}
+					className="underline"
+					color="secondary"
+					role="button"
+				>
+					{row.original.reference}
+				</Typography>
+			)
+		},
+		{
+			id: 'customer',
+			accessorFn: (row) => `${row.customer.firstName} ${row.customer.lastName}`,
+			header: 'Customer'
+		},
+		{
+			id: 'total',
+			accessorFn: (row) => `$${row.total}`,
+			header: 'Total',
+			size: 64
+		},
+		{ id: 'payment', accessorFn: (row) => row.payment.method, header: 'Payment', size: 128 },
+		{
+			id: 'status',
+			accessorFn: (row) => <OrdersStatus name={row.status[0].name} />,
+			accessorKey: 'status',
+			header: 'Status'
+		},
+		{
+			accessorKey: 'date',
+			header: 'Date',
+		}
+	];
+	let setColumns = url ? customColumns : demoColumns
 
 	const [removeOrders] = useDeleteECommerceOrdersMutation();
 	const columns = useMemo(
-		() => [
-			{
-				accessorKey: 'id',
-				header: 'Id',
-				size: 64
-			},
-			{
-				accessorKey: 'reference',
-				header: 'Reference',
-				size: 64,
-				Cell: ({ row }) => (
-					<Typography
-						component={Link}
-						to={`/apps/e-commerce/orders/${row.original.id}`}
-						className="underline"
-						color="secondary"
-						role="button"
-					>
-						{row.original.reference}
-					</Typography>
-				)
-			},
-			{
-				id: 'customer',
-				accessorFn: (row) => `${row.customer.firstName} ${row.customer.lastName}`,
-				header: 'Customer'
-			},
-			{
-				id: 'total',
-				accessorFn: (row) => `$${row.total}`,
-				header: 'Total',
-				size: 64
-			},
-			{ id: 'payment', accessorFn: (row) => row.payment.method, header: 'Payment', size: 128 },
-			{
-				id: 'status',
-				accessorFn: (row) => <OrdersStatus name={row.status[0].name} />,
-				accessorKey: 'status',
-				header: 'Status'
-			},
-			{
-				accessorKey: 'date',
-				header: 'Date'
-			}
-		],
+		() => setColumns,
 		[]
 	);
 
@@ -86,10 +137,8 @@ function OrdersTable() {
 						left: ['mrt-row-expand', 'mrt-row-select'],
 						right: ['mrt-row-actions']
 					},
-					pagination: {
-						pageIndex: 0,
-						pageSize: 20
-					}
+					onPaginationChange: setPagination, //hoist pagination state to your state when it changes internally
+					state: { pagination }
 				}}
 				data={orders}
 				columns={columns}
@@ -110,7 +159,6 @@ function OrdersTable() {
 				]}
 				renderTopToolbarCustomActions={({ table }) => {
 					const { rowSelection } = table.getState();
-
 					if (Object.keys(rowSelection).length === 0) {
 						return null;
 					}
