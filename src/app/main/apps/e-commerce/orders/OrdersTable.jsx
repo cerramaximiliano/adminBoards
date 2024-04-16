@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { useDeleteECommerceOrdersMutation, useGetECommerceOrdersQuery, useGetEcommerceTotalOrdersQuery } from '../ECommerceApi';
+import { useDeleteECommerceOrdersMutation, useGetECommerceOrdersQuery } from '../ECommerceApi';
 import OrdersStatus from '../order/OrdersStatus';
 
 import { format } from 'date-fns';
@@ -17,7 +17,7 @@ export function generateColumns(orders) {
     const customColumns = [];
 
     // Función recursiva para generar columnas
-    const generateNestedColumns = (object, prefix = '') => {
+    const generateNestedColumns = (object, prefix = '', keys) => {
         for (const key in object) {
             if (Object.hasOwnProperty.call(object, key)) {
                 const propertyValue = object[key];
@@ -35,7 +35,7 @@ export function generateColumns(orders) {
                 // Si la propiedad es 'signal', establecer una función accessorFn para mostrar 'BUY' o 'SELL'
 				if (key === 'signal') {
 					column.accessorFn = (row) => {
-						const signalValue = propertyValue;
+						const signalValue = row[keys].signal;
 						if (signalValue !== null && signalValue !== undefined) {
 							let resultName = signalValue > 0 ? 'BUY' : signalValue < 0 ? 'SELL' : 'NEUTRAL';
 							 return <OrdersStatus name={resultName} />
@@ -46,7 +46,7 @@ export function generateColumns(orders) {
 				}
                 // Si la propiedad es un objeto y no es nula, llamar recursivamente a generateNestedColumns
                 if (typeof propertyValue === 'object' && propertyValue !== null) {
-                    generateNestedColumns(propertyValue, prefix + key + '.');
+                    generateNestedColumns(propertyValue, prefix + key + '.', key);
                 } else {
                     // Si la propiedad no es 'signal' y es un número, formatearlo para mostrar solo dos dígitos
                     if (typeof propertyValue === 'number' && key !== 'signal') {
@@ -68,10 +68,11 @@ export function generateColumns(orders) {
     return customColumns;
 };
 
-function OrdersTable({url, urlTable}) {
+function OrdersTable({url, urlTable, title}) {
 	const [pagination, setPagination] = useState({
 		pageIndex: 0,
 		pageSize: 10,
+
 	});
 
 	let urlBase = ''
@@ -150,9 +151,15 @@ function OrdersTable({url, urlTable}) {
 						right: ['mrt-row-actions']
 					},
 					onPaginationChange: setPagination, //hoist pagination state to your state when it changes internally
-					state: { pagination }
+					state: { pagination },
+					muiPaginationProps: {
+						size: 'small'
+					}
 				}}
-				title={url && 'BTC/USDT Binance 15m'}
+				
+
+
+				title={url && title}
 				data={orders}
 				columns={columns}
 				renderRowActionMenuItems={({ closeMenu, row, table }) => [

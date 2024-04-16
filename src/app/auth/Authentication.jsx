@@ -150,6 +150,12 @@ function Authentication(props) {
 						table1: firebaseUser.urls.table1,
 						table2: firebaseUser.urls.table2,
 						table3: firebaseUser.urls.table3
+					},
+					tablesName: {
+						table0: firebaseUser.tablesName.table0,
+						table1: firebaseUser.tablesName.table1,
+						table2: firebaseUser.tablesName.table2,
+						table3: firebaseUser.tablesName.table3,
 					}
 				})
 			);

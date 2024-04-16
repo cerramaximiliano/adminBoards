@@ -11,16 +11,17 @@ import { useState } from 'react';
  * The orders page.
  */
 function Orders() {
-	const { url, tables, urls } = useAppSelector(selectUser);
+	const { url, tables, urls, tablesName } = useAppSelector(selectUser);
 	const tabs = Object.keys(tables);
 	const [currentUrl, setCurrentUrl] = useState( urls[tabs[0]] );
 
 	const [tab, setTab] = useState(tabs[0])
-
+	const [title, setTitle] = useState( tablesName[tabs[0]] || '' );
 
 	const handleClick = (tab) => {
 		setCurrentUrl(urls[tab]);
-		setTab(tab)
+		setTab(tab);
+		setTitle(tablesName[tab]);
 	}
 
 	return (
@@ -39,7 +40,7 @@ function Orders() {
 					{
 						tabs && tabs.length > 0 
 						? tabs.map( (tab, index) => (
-							<div className='mt-10 mb-10 mx-2'>
+							<div className='mt-10 mb-10 mx-2' key={index}>
 							<Button
 							size="small"
 							key={index}
@@ -61,7 +62,7 @@ function Orders() {
 					</div>
 
 				</div>
-				<OrdersTable url={url} urlTable={currentUrl}/>
+				<OrdersTable url={url} urlTable={currentUrl} title={title}/>
 			</div>
 		</>
 	);

@@ -28,6 +28,12 @@ function UserModel(data) {
 			table1: '',
 			table2: '',
 			table3: '',
+		},
+		tablesName: {
+			table0: '',
+			table1: '',
+			table2: '',
+			table3: '',
 		}
 	});
 }

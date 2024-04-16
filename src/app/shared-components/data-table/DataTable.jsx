@@ -114,7 +114,8 @@ function DataTable(props) {
 					rowsPerPageOptions: [10, 20, 30],
 					shape: 'rounded',
 					variant: 'outlined',
-					showRowsPerPage: false
+					showRowsPerPage: false,
+					size: 'small'
 				},
 				muiSearchTextFieldProps: {
 					placeholder: 'Search',
