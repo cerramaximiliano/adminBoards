@@ -14,7 +14,6 @@ const axiosBaseQuery = () => async ({ url, method, data, params }) => {
                 'x-api-key': 'WMEyVRFmNegvwuB1YT4rkKW5Yjh1'
             }
         });
-        console.log(result.data)
         return { data: result.data };
     } catch (axiosError) {
         const error = axiosError;

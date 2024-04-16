@@ -11,7 +11,6 @@ const navigationConfig = [
 	{
 		id: 'dashboards',
 		title: 'Dashboards',
-		subtitle: 'Unique dashboard designs',
 		type: 'group',
 		icon: 'heroicons-outline:home',
 		translate: 'DASHBOARDS',
@@ -35,7 +34,6 @@ const navigationConfig = [
 	{
 		id: 'apps',
 		title: 'Applications',
-		subtitle: 'Custom made application designs',
 		type: 'group',
 		icon: 'heroicons-outline:cube',
 		translate: 'APPLICATIONS',
@@ -64,19 +62,19 @@ const navigationConfig = [
 				end: true
 			},
 			{
+				id: 'apps.notifications',
+				title: 'Notifications',
+				type: 'item',
+				icon: 'heroicons-outline:bell',
+				url: '/apps/notifications'
+			},
+			{
 				id: 'apps.profile',
 				title: 'Profile',
 				type: 'item',
 				icon: 'heroicons-outline:user-circle',
 				url: '/apps/profile'
 			},
-			{
-				id: 'apps.notifications',
-				title: 'Notifications',
-				type: 'item',
-				icon: 'heroicons-outline:bell',
-				url: '/apps/notifications'
-			}
 		]
 	},
 

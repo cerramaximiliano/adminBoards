@@ -13,8 +13,6 @@ import useFirebaseAuth from './services/firebase/useFirebaseAuth';
 
 function Authentication(props) {
 
-	console.log(import.meta.env.VITE_MODE)
-
 	const { children } = props;
 	const { setAuthProvider, resetAuthProvider } = useAuth();
 	const userRole = useAppSelector(selectUserRole);

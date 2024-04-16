@@ -73,6 +73,16 @@ export const orderStatuses = [
 		id: '14',
 		name: 'Awaiting Cash-on-delivery payment',
 		color: 'bg-blue-800 text-white'
+	},
+	{
+		id: '15',
+		name: 'SELL',
+		color: 'bg-red-800 text-white'
+	},
+	{
+		id: '16',
+		name: 'BUY',
+		color: 'bg-green-800 text-white'
 	}
 ];
 

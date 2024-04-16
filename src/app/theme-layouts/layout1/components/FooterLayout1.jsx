@@ -5,6 +5,7 @@ import { memo } from 'react';
 import { selectFooterTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import clsx from 'clsx';
 import { useAppSelector } from 'app/store/hooks';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
 /**
  * The footer layout 1.
@@ -27,7 +28,7 @@ function FooterLayout1(props) {
 				elevation={0}
 			>
 				<Toolbar className="min-h-48 md:min-h-64 px-8 sm:px-12 py-0 flex items-center overflow-x-auto">
-					Footer
+					 Adminboards Ⓒ 2023
 				</Toolbar>
 			</AppBar>
 		</ThemeProvider>

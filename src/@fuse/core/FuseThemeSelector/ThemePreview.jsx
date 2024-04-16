@@ -95,7 +95,7 @@ function ThemePreview(props) {
 							color: footer.palette.text.primary
 						}}
 					>
-						<span className="text-12">Footer</span>
+						<span className="text-12">Adminboards<span></span></span>
 					</div>
 				</div>
 			</button>

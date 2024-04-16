@@ -13,10 +13,14 @@ import { useState } from 'react';
 function Orders() {
 	const { url, tables, urls } = useAppSelector(selectUser);
 	const tabs = Object.keys(tables);
-	const [currentUrl, setCurrentUrl] = useState( urls[tabs[0]] )
+	const [currentUrl, setCurrentUrl] = useState( urls[tabs[0]] );
+
+	const [tab, setTab] = useState(tabs[0])
+
+
 	const handleClick = (tab) => {
-		console.log(urls[tab], tab)
-		setCurrentUrl(urls[tab])
+		setCurrentUrl(urls[tab]);
+		setTab(tab)
 	}
 
 	return (
@@ -31,20 +35,23 @@ function Orders() {
 			<div className="w-full h-full container flex flex-col">
 				<div className='flex flex-col md:flex-row'>
 					<OrdersHeader title={url ? 'Last BTC Data' : 'Orders' } />
-					<div className='flex w-full md:w-1/2 items-center justify-around'>					
+					<div className='flex w-full flex-wrap md:w-1/2 items-center justify-around'>
 					{
 						tabs && tabs.length > 0 
 						? tabs.map( (tab, index) => (
+							<div className='mt-10 mb-10 mx-2'>
 							<Button
+							size="small"
 							key={index}
 							onClick={ () =>  handleClick(tab) }
 							className="whitespace-nowrap"
 							variant="contained"
 							color="primary"
-							startIcon={<FuseSvgIcon size={20}>heroicons-outline:chart-bar</FuseSvgIcon>}
+							startIcon={<FuseSvgIcon size={20}>heroicons-outline:chart-square-bar</FuseSvgIcon>}
 							>
 							{tables[tab]}
 						</Button>
+						</div>
 						) )
 						: false
 
