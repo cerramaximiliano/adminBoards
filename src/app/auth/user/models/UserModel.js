@@ -16,7 +16,19 @@ function UserModel(data) {
 			settings: {}
 		},
 		url: '',
-		apiKey: ''
+		apiKey: '',
+		tables: {
+			table0: '',
+			table1: '',
+			table2: '',
+			table3: '',
+		},
+		urls: {
+			table0: '',
+			table1: '',
+			table2: '',
+			table3: '',
+		}
 	});
 }
 

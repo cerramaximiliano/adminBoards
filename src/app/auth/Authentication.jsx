@@ -140,7 +140,19 @@ function Authentication(props) {
 					data: firebaseUser.data,
 					role: ['admin'],
 					url: firebaseUser.url || '/mock-api',
-					apiKey: firebaseUser.apiKey
+					apiKey: firebaseUser.apiKey,
+					tables: {
+						table0: firebaseUser.tables.table0,
+						table1: firebaseUser.tables.table1,
+						table2: firebaseUser.tables.table2,
+						table3: firebaseUser.tables.table3
+					},
+					urls: {
+						table0: firebaseUser.urls.table0,
+						table1: firebaseUser.urls.table1,
+						table2: firebaseUser.urls.table2,
+						table3: firebaseUser.urls.table3
+					}
 				})
 			);
 		}

@@ -69,7 +69,7 @@ const tableIcons = {
 };
 
 function DataTable(props) {
-	const { columns, data, ...rest } = props;
+	const { columns, data, title, ...rest } = props;
 	const defaults = useMemo(
 		() =>
 			_.defaults(rest, {
@@ -185,7 +185,7 @@ function DataTable(props) {
 					pinnedRowBackgroundColor: theme.palette.background.paper,
 					pinnedColumnBackgroundColor: theme.palette.background.paper
 				}),
-				renderTopToolbar: (_props) => <DataTableTopToolbar {..._props} />,
+				renderTopToolbar: (_props) => <DataTableTopToolbar { ..._props } title={title} />,
 				icons: tableIcons
 			}),
 		[rest]

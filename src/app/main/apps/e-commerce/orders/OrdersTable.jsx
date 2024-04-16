@@ -13,17 +13,17 @@ import { useAppSelector } from 'app/store/hooks';
 import { selectUser } from 'src/app/auth/user/store/userSlice';
 import { format } from 'date-fns';
 
-function OrdersTable() {
+function OrdersTable({url, urlTable}) {
 
-	const { url } = useAppSelector(selectUser);
 	const [pagination, setPagination] = useState({
 		pageIndex: 0,
 		pageSize: 10,
 	});
+	console.log(urlTable)
+	//const { data: orders, isLoading } = useGetECommerceOrdersQuery( url ? `${url}${urlTable}?order=-1&limit=100` : `/mock-api/ecommerce/orders` );
+	const { data: orders, isLoading } = useGetECommerceOrdersQuery( url ? `http://localhost:3030/${urlTable}?order=-1&limit=100` : `/mock-api/ecommerce/orders` );
 
-	const { data: orders, isLoading } = useGetECommerceOrdersQuery( url ? `${url}database/ticks?order=-1&limit=100` : `/mock-api/ecommerce/orders` );
-
-	const customColumns = [
+	const customColumns = [	
 		{
 			accessorKey: '_id',
 			header: 'id'
@@ -140,6 +140,7 @@ function OrdersTable() {
 					onPaginationChange: setPagination, //hoist pagination state to your state when it changes internally
 					state: { pagination }
 				}}
+				title={url && 'BTC/USDT Binance 15m'}
 				data={orders}
 				columns={columns}
 				renderRowActionMenuItems={({ closeMenu, row, table }) => [

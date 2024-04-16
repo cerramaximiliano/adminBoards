@@ -8,7 +8,7 @@ function OrdersHeader({title}) {
 
 
 	return (
-		<div className="flex space-y-12 sm:space-y-0 flex-1 w-full items-center justify-between py-8 sm:py-16 px-16 md:px-24">
+		<div className="flex space-y-12 sm:space-y-0 flex-1 w-1/2 items-center justify-between py-8 sm:py-16 px-16 md:px-24">
 			<motion.span
 				initial={{ x: -20 }}
 				animate={{

@@ -9,7 +9,7 @@ import {
 	MRT_ToolbarInternalButtons
 } from 'material-react-table';
 
-function DataTableTopToolbar({ table }) {
+function DataTableTopToolbar({ table, title }) {
 	const {
 		getState,
 		options: {
@@ -38,7 +38,8 @@ function DataTableTopToolbar({ table }) {
 		table
 	};
 	return (
-		<div className="flex flex-col w-full py-4 px-12 border-b-1">
+		<div className="flex flex-col sm:flex-row w-full py-4 px-12 border-b-1">
+			<h4 className='flex w-full items-center'>{title}</h4>
 			<Box
 				className="flex flex-col w-full items-center"
 				{...toolbarProps}
